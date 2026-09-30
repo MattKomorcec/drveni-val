@@ -1,0 +1,101 @@
+[
+  {
+    "slug": "slike-naplavina-30x30",
+    "title": {
+      "hr": "Slike naplavina 30×30",
+      "en": "Driftwood paintings 30×30",
+      "de": "Treibholzbilder 30×30"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "slike-naplavina-20x30",
+    "title": {
+      "hr": "Slike naplavina 20×30",
+      "en": "Driftwood paintings 20×30",
+      "de": "Treibholzbilder 20×30"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "slike-naplavina-20x20",
+    "title": {
+      "hr": "Slike naplavina 20×20",
+      "en": "Driftwood paintings 20×20",
+      "de": "Treibholzbilder 20×20"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "skure",
+    "title": {
+      "hr": "Škure",
+      "en": "Shutters",
+      "de": "Fensterläden"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "kutije-za-olovke",
+    "title": {
+      "hr": "Kutije za olovke",
+      "en": "Pencil holders",
+      "de": "Stiftehalter"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "vjesalice",
+    "title": {
+      "hr": "Vješalice",
+      "en": "Wall hangers",
+      "de": "Wandhaken"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "torbe",
+    "title": {
+      "hr": "Torbe",
+      "en": "Tote bags",
+      "de": "Stofftaschen"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "salice",
+    "title": {
+      "hr": "Šalice",
+      "en": "Mugs",
+      "de": "Tassen"
+    },
+    "enabled": true
+  },
+  {
+    "slug": "satovi",
+    "title": {
+      "hr": "Satovi",
+      "en": "Wall clocks",
+      "de": "Wanduhren"
+    },
+    "enabled": false
+  },
+  {
+    "slug": "ogrlice",
+    "title": {
+      "hr": "Ogrlice",
+      "en": "Necklaces",
+      "de": "Halsketten"
+    },
+    "enabled": false
+  },
+  {
+    "slug": "majice",
+    "title": {
+      "hr": "Majice",
+      "en": "T-shirts",
+      "de": "T-Shirts"
+    },
+    "enabled": false
+  }
+]

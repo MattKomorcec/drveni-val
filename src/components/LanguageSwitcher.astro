@@ -1,0 +1,51 @@
+---
+import { type Lang, languages, getAlternateLinks } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+// x-default is only for hreflang tags, not a language the visitor can pick
+const alternateLinks = getAlternateLinks(Astro.url.pathname).filter(({ lang: l }) => l in languages);
+
+const flags: Record<Lang, string> = {
+  hr: '/svg/flag-cro.svg',
+  en: '/svg/flag-en.svg',
+  de: '/svg/flag-de.svg',
+};
+---
+
+<div class="relative language-switcher">
+  <button class="flex items-center gap-2 focus:outline-none" aria-label="Change language">
+    <img src={flags[lang]} alt={languages[lang]} width="24" height="24" />
+    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div class="hidden absolute right-0 mt-2 bg-white rounded-lg shadow-lg py-2 z-50 min-w-[140px] language-dropdown">
+    {alternateLinks.map(({ lang: altLang, href }) => (
+      <a
+        href={href}
+        class:list={[
+          'flex items-center gap-3 px-4 py-2 hover:bg-lightblue text-navy text-sm',
+          altLang === lang && 'font-bold',
+        ]}
+      >
+        <img src={flags[altLang]} alt={languages[altLang]} width="20" height="20" />
+        {languages[altLang]}
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.language-switcher').forEach((switcher) => {
+    const button = switcher.querySelector('button');
+    const dropdown = switcher.querySelector('.language-dropdown');
+    button?.addEventListener('click', () => dropdown?.classList.toggle('hidden'));
+    document.addEventListener('click', (e) => {
+      if (!switcher.contains(e.target as Node)) dropdown?.classList.add('hidden');
+    });
+  });
+</script>

@@ -1,0 +1,24 @@
+---
+import { type Lang, t, getLocalizedPath } from '../i18n/utils';
+import Button from './Button.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="px-4 lg:px-40 py-20 bg-sea-blue text-white">
+  <div class="lg:w-2/3 mx-auto">
+    <h2 class="text-center text-[44px] mb-12">{t(lang, 'business_cta.title')}</h2>
+    <p class="text-center">{t(lang, 'business_cta.text')}</p>
+    <div class="text-center mt-16">
+      <Button text={t(lang, 'business_cta.button')} href={getLocalizedPath(lang, '/contact')} variant="white" />
+    </div>
+  </div>
+</div>
+
+<div>
+  <img src="/images/wave_blue_top_right.png" alt="" width="1440" height="123" class="w-full" />
+</div>

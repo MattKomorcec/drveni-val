@@ -1,0 +1,49 @@
+---
+import { type Lang, t } from '../i18n/utils';
+import type { Product } from '../data/types';
+import { colorMap } from '../data/types';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+  /** Link target. Without it the card opens the photo viewer on the products page. */
+  href?: string;
+}
+
+const { product, lang, href } = Astro.props;
+
+const title = product.title;
+const titleWords = title.split(' ');
+const lastWord = titleWords[titleWords.length - 1];
+const titleWithoutLast = titleWords.slice(0, -1).join(' ');
+const underlineColor = colorMap[lastWord] ?? 'transparent';
+
+const Tag = href ? 'a' : 'button';
+const tagProps = href
+  ? { href }
+  : {
+      type: 'button',
+      'data-product-viewer': JSON.stringify(product.images),
+      'data-title': title,
+      'aria-label': `${title}: ${t(lang, 'products.open')}`,
+    };
+---
+
+<article id={product.slug} class="bg-white text-navy rounded-lg max-w-[310px] w-full mx-auto scroll-mt-8">
+  <Tag {...tagProps} class="block w-full text-left cursor-pointer group">
+    <img
+      src={product.images[0]}
+      alt={title}
+      class="object-cover rounded-t-lg w-full aspect-[310/315] transition-opacity group-hover:opacity-90"
+      width="310"
+      height="315"
+      loading="lazy"
+    />
+    <p class="font-semibold px-6 py-6 text-xl">
+      {titleWithoutLast}{' '}
+      <span class="italic inline-block" style={`border-bottom: 2px solid ${underlineColor}`}>
+        {lastWord}
+      </span>
+    </p>
+  </Tag>
+</article>

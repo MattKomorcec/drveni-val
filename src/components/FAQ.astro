@@ -1,0 +1,68 @@
+---
+import { type Lang, t } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const questions = [
+  { q: t(lang, 'faq.q1'), a: t(lang, 'faq.a1'), id: 1 },
+  { q: t(lang, 'faq.q2'), a: t(lang, 'faq.a2'), id: 2 },
+  { q: t(lang, 'faq.q3'), a: t(lang, 'faq.a3'), id: 3 },
+  { q: t(lang, 'faq.q4'), a: t(lang, 'faq.a4'), id: 4 },
+];
+---
+
+<div class="bg-white px-4 md:px-20 py-20">
+  <h2 class="text-navy text-center text-[44px] mb-20">{t(lang, 'faq.title')}</h2>
+
+  <section class="bg-white py-12 text-navy">
+    <div class="container mx-auto md:px-16">
+      {questions.map(({ q, a, id }, i) => (
+        <div class:list={['border-navy p-4', i === 0 ? 'border-y-[1px]' : 'border-b-[1px]']}>
+          <button
+            class="w-full text-left flex justify-between items-center faq-toggle"
+            data-target={`answer${id}`}
+            data-icon={`icon${id}`}
+            aria-expanded="false"
+            aria-controls={`answer${id}`}
+          >
+            <span class="text-[20px] font-bold">{q}</span>
+            <svg
+              class="h-6 w-6 transform transition-transform duration-300 shrink-0"
+              id={`icon${id}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="hidden mt-4" id={`answer${id}`} role="region" aria-labelledby={`faq-q${id}`}>
+            {a}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const iconId = button.getAttribute('data-icon');
+      const answer = document.getElementById(targetId!);
+      const icon = document.getElementById(iconId!);
+
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!isExpanded));
+
+      answer?.classList.toggle('hidden');
+      icon?.classList.toggle('rotate-180');
+    });
+  });
+</script>

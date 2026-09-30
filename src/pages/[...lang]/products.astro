@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HeaderWave from '../../components/HeaderWave.astro';
+import FooterWave from '../../components/FooterWave.astro';
+import Footer from '../../components/Footer.astro';
+import Button from '../../components/Button.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { type Lang, defaultLang, t, getLocalizedPath, getLocalePaths } from '../../i18n/utils';
+import { collections } from '../../data/collections';
+import { getProductsByCollection } from '../../data/products';
+
+export const getStaticPaths = getLocalePaths;
+
+const lang = (Astro.params.lang as Lang) || defaultLang;
+---
+
+<BaseLayout title={t(lang, 'page.products.title')} description={t(lang, 'page.products.description')} lang={lang}>
+  <Header lang={lang} />
+  <HeaderWave bgColor="bg-lightblue" />
+
+  <div class="bg-lightblue px-4 md:px-20 py-20">
+    <h1 class="font-semibold text-navy text-center text-[44px] mb-8">{t(lang, 'products.title')}</h1>
+    <p class="text-center text-navy max-w-2xl mx-auto">{t(lang, 'products.intro')}</p>
+
+    <nav class="flex flex-wrap justify-center gap-3 mt-12 font-open-sans text-sm">
+      {collections.map((collection) => (
+        <a
+          href={`#${collection.slug}`}
+          class="px-4 py-2 rounded-full border-2 border-navy text-navy hover:bg-navy hover:text-white"
+        >
+          {collection.title[lang]}
+        </a>
+      ))}
+    </nav>
+
+    {collections.map((collection) => (
+      <section id={collection.slug} class="mt-24 scroll-mt-8">
+        <h2 class="font-semibold text-navy text-center text-[32px] mb-12">{collection.title[lang]}</h2>
+        <div class="grid gap-x-6 gap-y-12 justify-center grid-cols-[repeat(auto-fit,minmax(260px,310px))]">
+          {getProductsByCollection(collection.slug).map((product) => (
+            <ProductCard product={product} lang={lang} />
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <div class="px-4 lg:px-40 py-20 bg-sea-blue text-white">
+    <div class="lg:w-2/3 mx-auto text-center">
+      <h2 class="text-[44px] mb-12">{t(lang, 'products.visit_title')}</h2>
+      <p>{t(lang, 'products.visit_text')}</p>
+      <div class="mt-16">
+        <Button text={t(lang, 'products.visit_button')} href={getLocalizedPath(lang, '/contact')} variant="white" />
+      </div>
+    </div>
+  </div>
+
+  <FooterWave bgColor="bg-sea-blue" />
+  <Footer lang={lang} />
+
+  <dialog
+    id="product-viewer"
+    class="m-auto w-full max-w-4xl max-h-[95vh] bg-transparent p-4 backdrop:bg-navy/80"
+    aria-labelledby="product-viewer-title"
+  >
+    <div class="bg-white rounded-3xl p-4 md:p-8 text-navy">
+      <div class="flex justify-between items-start gap-4 mb-4">
+        <h2 id="product-viewer-title" class="font-semibold text-xl md:text-2xl"></h2>
+        <button type="button" data-viewer-close class="shrink-0 p-1 cursor-pointer" aria-label={t(lang, 'products.close')}>
+          <img src="/svg/icon_close.svg" width="24" height="24" alt="" />
+        </button>
+      </div>
+      <div class="relative">
+        <div data-viewer-track class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none]"></div>
+        <button
+          type="button"
+          data-viewer-prev
+          class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow cursor-pointer disabled:hidden"
+          aria-label={t(lang, 'products.prev')}
+        >
+          <img src="/svg/chevron_left.svg" width="24" height="24" alt="" />
+        </button>
+        <button
+          type="button"
+          data-viewer-next
+          class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow cursor-pointer disabled:hidden"
+          aria-label={t(lang, 'products.next')}
+        >
+          <img src="/svg/chevron_right.svg" width="24" height="24" alt="" />
+        </button>
+      </div>
+      <p data-viewer-counter class="text-center font-open-sans text-sm mt-4"></p>
+    </div>
+  </dialog>
+</BaseLayout>
+
+<script>
+  const dialog = document.getElementById('product-viewer') as HTMLDialogElement;
+  const title = dialog.querySelector('#product-viewer-title')!;
+  const track = dialog.querySelector<HTMLElement>('[data-viewer-track]')!;
+  const prev = dialog.querySelector<HTMLButtonElement>('[data-viewer-prev]')!;
+  const next = dialog.querySelector<HTMLButtonElement>('[data-viewer-next]')!;
+  const counter = dialog.querySelector('[data-viewer-counter]')!;
+
+  let count = 0;
+
+  const currentIndex = () => Math.round(track.scrollLeft / track.clientWidth);
+
+  function update() {
+    const index = currentIndex();
+    prev.disabled = index <= 0;
+    next.disabled = index >= count - 1;
+    counter.textContent = count > 1 ? `${index + 1} / ${count}` : '';
+  }
+
+  function scrollToIndex(index: number) {
+    track.scrollTo({ left: index * track.clientWidth });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-product-viewer]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const images: string[] = JSON.parse(card.dataset.productViewer ?? '[]');
+      const name = card.dataset.title ?? '';
+      count = images.length;
+      title.textContent = name;
+      track.replaceChildren(
+        ...images.map((src, i) => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `${name} (${i + 1}/${images.length})`;
+          img.className = 'w-full shrink-0 snap-center object-contain max-h-[70vh]';
+          return img;
+        }),
+      );
+      dialog.showModal();
+      track.scrollLeft = 0;
+      update();
+    });
+  });
+
+  track.addEventListener('scroll', update, { passive: true });
+  prev.addEventListener('click', () => scrollToIndex(currentIndex() - 1));
+  next.addEventListener('click', () => scrollToIndex(currentIndex() + 1));
+  dialog.querySelector('[data-viewer-close]')!.addEventListener('click', () => dialog.close());
+
+  // Close when clicking the backdrop
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') scrollToIndex(currentIndex() - 1);
+    if (e.key === 'ArrowRight') scrollToIndex(currentIndex() + 1);
+  });
+</script>

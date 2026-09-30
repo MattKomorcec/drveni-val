@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/* ================================================
+   Drveni Val — Tailwind v4 Theme Configuration
+   Ported from tailwind.config.js (v3) + style.css
+   ================================================ */
+
+@theme {
+  /* Colors */
+  --color-grey: #DDE1ED;
+  --color-mint-green: #90EBC4;
+  --color-navy: #0C0B51;
+  --color-orange: #EC6A21;
+  --color-pink: #F2ABC9;
+  --color-sea-blue: #1540C1;
+  --color-turqoise: #39CEE6;
+  --color-warm-red: #E85151;
+  --color-yellow: #FFDD44;
+  --color-lightblue: #DEF5FC;
+
+  /* Fonts */
+  --font-open-sans: "Open Sans Variable", sans-serif;
+  --font-literata: "Literata Variable", serif;
+  --font-grandstander: "Grandstander Variable", sans-serif;
+
+  /* Animations */
+  --animate-wiggle: wiggle 5s ease-in-out infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-30deg); }
+  50% { transform: rotate(30deg); }
+}
+
+@keyframes glow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Global styles */
+img {
+  user-select: none;
+}
+
+.contact-form {
+  max-width: 550px;
+  margin: 40px auto 0 auto;
+}

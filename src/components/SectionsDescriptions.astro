@@ -1,0 +1,49 @@
+---
+import { type Lang, t } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="bg-[#DEF2FC] px-4 md:px-20 py-20">
+  <div class="flex flex-col justify-between text-center md:flex-row gap-4">
+    <article class="w-full md:w-[380px] text-navy">
+      <img src="/svg/unique.svg" alt="" width="64" height="64" class="mx-auto" />
+      <h3 class="my-4 font-bold text-2xl">{t(lang, 'sections.unique_title')}</h3>
+      <p>{t(lang, 'sections.unique_text')}</p>
+    </article>
+
+    <article class="w-full md:w-[380px] text-navy">
+      <img src="/svg/handmade.svg" alt="" width="64" height="64" class="mx-auto" />
+      <h3 class="my-4 font-bold text-2xl">{t(lang, 'sections.handmade_title')}</h3>
+      <p>{t(lang, 'sections.handmade_text')}</p>
+    </article>
+
+    <article class="w-full md:w-[380px] text-navy">
+      <img src="/svg/sustainable.svg" alt="" width="64" height="64" class="mx-auto" />
+      <h3 class="my-4 font-bold text-2xl">{t(lang, 'sections.sustainable_title')}</h3>
+      <p>{t(lang, 'sections.sustainable_text')}</p>
+    </article>
+  </div>
+</div>
+
+<div class="bg-navy relative">
+  <img src="/images/wave_lightblue_top.png" alt="" width="100%" height="100%" />
+  <img
+    src="/svg/house-group-01.svg"
+    width="100"
+    height="100"
+    alt=""
+    class="w-[15%] h-full absolute top-[-35%] left-[30%]"
+  />
+  <img
+    src="/svg/rudder.svg"
+    alt=""
+    width="100"
+    height="100"
+    class="w-[10%] h-full absolute top-[30%] right-[18%] animate-wiggle"
+  />
+</div>

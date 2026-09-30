@@ -1,0 +1,45 @@
+---
+interface Props {
+  imageNumber: number;
+  heading: string;
+  text1: string;
+  text2: string;
+  containerClass?: string;
+}
+
+const { imageNumber, heading, text1, text2, containerClass = '' } = Astro.props;
+---
+
+<div class:list={['flex flex-wrap text-navy mb-16 md:mb-44', containerClass]}>
+  <div class="w-full md:w-1/2 p-5">
+    <h3 class="text-2xl">{heading}</h3>
+    <p class="mt-10">{text1}</p>
+    <p class="mt-6">{text2}</p>
+  </div>
+
+  <div class="w-full md:w-1/2 relative stacked-image">
+    <img src={`/images/about_image_${imageNumber}.png`} width="100" height="100" class="w-full" alt="" />
+    <img src={`/images/about_box_${imageNumber}.png`} width="100" height="100" class="w-full" alt="" />
+  </div>
+</div>
+
+<style>
+  .stacked-image {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    position: relative;
+  }
+
+  .stacked-image img:first-child {
+    grid-column: 1 / 12;
+    grid-row: 1;
+    padding-top: 10%;
+    z-index: 10;
+  }
+
+  .stacked-image img:last-child {
+    grid-column: 8 / 13;
+    grid-row: 1;
+    z-index: 0;
+  }
+</style>

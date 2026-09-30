@@ -1,0 +1,42 @@
+---
+import { type Lang } from '../i18n/utils';
+import Header from './Header.astro';
+import HeaderWave from './HeaderWave.astro';
+import FooterWave from './FooterWave.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  lang: Lang;
+  containerClass?: string;
+}
+
+const { lang, containerClass = '' } = Astro.props;
+---
+
+<Header lang={lang} />
+<HeaderWave bgColor="bg-lightblue" />
+
+<div class="bg-lightblue px-4 md:px-20 py-20">
+  <div class:list={['bg-white rounded-3xl py-16 px-8 relative max-w-5xl mx-auto text-navy', containerClass]}>
+    <slot />
+  </div>
+</div>
+
+<FooterWave bgColor="bg-lightblue" />
+<Footer lang={lang} />
+
+<style>
+  :global(.legal-content p) {
+    margin: 16px 0;
+  }
+
+  :global(.legal-content h4),
+  :global(.legal-content h5) {
+    font-weight: bold;
+  }
+
+  :global(.legal-content ul) {
+    list-style: disc;
+    margin: 16px;
+  }
+</style>

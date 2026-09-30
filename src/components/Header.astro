@@ -1,0 +1,100 @@
+---
+import { type Lang, getLocalizedPath, getNavLinks, isActivePath } from '../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const currentPath = Astro.url.pathname;
+const navLinks = getNavLinks(lang);
+---
+
+<nav class="bg-navy text-white md:pt-14 md:px-14 pt-4 px-4">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center space-x-4">
+      <a href={getLocalizedPath(lang, '/')}>
+        <img src="/svg/logo.svg" alt="Drveni Val" width="64" height="64" class="w-full" />
+      </a>
+    </div>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex space-x-8">
+      {navLinks.map(({ label, href }) => (
+        <a href={href} class:list={['hover:text-orange uppercase', isActivePath(href, currentPath) && 'text-orange']}>
+          {label}
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden md:flex items-center space-x-8">
+      <LanguageSwitcher lang={lang} />
+    </div>
+
+    <!-- Mobile hamburger -->
+    <div class="md:hidden">
+      <button id="menu-btn" aria-label="Menu" aria-expanded="false">
+        <svg class="w-6 h-6" viewBox="0 0 24 24">
+          <g class="menu-icon" stroke="white" stroke-width="2" stroke-linecap="round">
+            <path class="line line-1" d="M3 6h18" />
+            <path class="line line-2" d="M3 12h18" />
+            <path class="line line-3" d="M3 18h18" />
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="menu" class="py-10 text-center hidden md:hidden">
+    {navLinks.map(({ label, href }) => (
+      <a href={href} class:list={['block my-6 hover:text-orange text-2xl', isActivePath(href, currentPath) && 'text-orange']}>
+        {label}
+      </a>
+    ))}
+    <div class="flex justify-center py-2 px-4 gap-4">
+      <LanguageSwitcher lang={lang} />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .menu-icon .line {
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .menu-icon.active .line-1 {
+    transform: translateY(0) rotate(40deg);
+  }
+
+  .menu-icon.active .line-2 {
+    opacity: 0;
+  }
+
+  .menu-icon.active .line-3 {
+    transform: translateY(-10px) rotate(-40deg);
+  }
+</style>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
+  const menuIcon = document.querySelector('.menu-icon');
+
+  menuBtn?.addEventListener('click', () => {
+    const isHidden = menu?.classList.contains('hidden');
+    if (isHidden) {
+      menu?.classList.remove('hidden');
+      menuIcon?.classList.add('active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    } else {
+      menuIcon?.classList.remove('active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      setTimeout(() => menu?.classList.add('hidden'), 300);
+    }
+  });
+</script>

@@ -1,0 +1,93 @@
+---
+import { type Lang, t, getLocalizedPath } from '../i18n/utils';
+import Header from './Header.astro';
+import HeaderWave from './HeaderWave.astro';
+import FooterWave from './FooterWave.astro';
+import Footer from './Footer.astro';
+import Button from './Button.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const inputClass =
+  'block w-full rounded-[4px] border-0 py-[10px] px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 mb-7';
+---
+
+<Header lang={lang} />
+<HeaderWave bgColor="bg-lightblue" />
+
+<div class="bg-lightblue px-4 md:px-20 py-20">
+  <div class="bg-white rounded-3xl py-16 relative max-w-5xl mx-auto">
+    <h2 class="text-center text-2xl text-navy">{t(lang, 'contact.title')}</h2>
+    <img src="/svg/stamp.svg" width="100" height="100" alt="" class="absolute top-[-10%] right-22.5 rotate-12" />
+
+    <form class="contact-form" id="contact-form">
+      <input type="text" name="name" placeholder={t(lang, 'contact.name')} class={inputClass} required />
+      <input type="email" name="email" placeholder={t(lang, 'contact.email')} class={inputClass} required />
+      <input type="tel" name="phone" placeholder={t(lang, 'contact.phone')} class={inputClass} />
+      <textarea name="message" placeholder={t(lang, 'contact.message')} class={inputClass} required></textarea>
+      <button
+        type="submit"
+        class="bg-orange text-white px-10 py-4 rounded-full border-2 border-orange hover:bg-white hover:text-orange font-open-sans font-semibold block mx-auto"
+      >
+        {t(lang, 'contact.send')}
+      </button>
+      <div id="form-success" class="hidden mt-8">
+        <p class="text-navy text-center">{t(lang, 'contact.success')}</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="mt-40">
+    <h2 class="text-center text-4xl text-navy">{t(lang, 'contact.how_to_find')}</h2>
+  </div>
+
+  <div class="flex gap-6 sm:gap-24 justify-center mt-16 text-center flex-wrap">
+    <div>
+      <p class="font-bold">{t(lang, 'contact.hours')}</p>
+      <p>
+        {t(lang, 'contact.hours_value')} <br />
+        {t(lang, 'contact.hours_extra')}
+      </p>
+    </div>
+    <div>
+      <p class="font-bold">{t(lang, 'contact.title')}</p>
+      <a href="mailto:drvenival@gmail.com" class="underline">drvenival@gmail.com</a><br />
+      <a href="tel:+385918889310">+385 91 888-9310</a>
+    </div>
+    <div>
+      <p class="font-bold">{t(lang, 'contact.address_label')}</p>
+      <p>
+        Kralja Tomislava 3a,<br />
+        51250 Novi Vinodolski<br />
+        {t(lang, 'footer.address').split(',').pop()?.trim()}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="flex gap-4 py-10 bg-lightblue sm:flex-row flex-col">
+  <a href="https://maps.app.goo.gl/vkM8cY1ng6xi3JL6A" target="_blank" rel="noopener noreferrer" class="w-full sm:w-1/2">
+    <img src="/images/googlemap_croatia.png" width="100" height="100" class="w-full" alt="Map of Croatia" />
+  </a>
+  <a href="https://maps.app.goo.gl/vkM8cY1ng6xi3JL6A" target="_blank" rel="noopener noreferrer" class="w-full sm:w-1/2">
+    <img src="/images/googlemap_novi_drvenival.png" width="100" height="100" class="w-full" alt="Map of Novi Vinodolski" />
+  </a>
+</div>
+
+<div class="bg-lightblue pt-16 pb-40 text-center">
+  <div class="w-72 mx-auto">
+    <Button
+      text="Google Maps"
+      href="https://maps.app.goo.gl/vkM8cY1ng6xi3JL6A"
+      variant="orange"
+      target="_blank"
+    />
+  </div>
+</div>
+
+<FooterWave bgColor="bg-lightblue" />
+<Footer lang={lang} />

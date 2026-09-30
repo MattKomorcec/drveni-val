@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalPageLayout from '../../components/LegalPageLayout.astro';
+import { type Lang, defaultLang, t, getLocalePaths } from '../../i18n/utils';
+import PrivacyContentHR from '../../components/PrivacyContentHR.astro';
+import PrivacyContentEN from '../../components/PrivacyContentEN.astro';
+import PrivacyContentDE from '../../components/PrivacyContentDE.astro';
+
+export const getStaticPaths = getLocalePaths;
+
+const lang = (Astro.params.lang as Lang) || defaultLang;
+
+const content = { hr: PrivacyContentHR, en: PrivacyContentEN, de: PrivacyContentDE };
+const Content = content[lang];
+---
+
+<BaseLayout title={t(lang, 'page.privacy.title')} lang={lang}>
+  <LegalPageLayout lang={lang}>
+    <div class="legal-content">
+      <h1 class="text-center text-2xl mb-8">{t(lang, 'page.privacy.heading')}</h1>
+      <Content />
+    </div>
+  </LegalPageLayout>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+// Self-hosted fonts (no requests to Google, see privacy policy)
+import '@fontsource-variable/open-sans/wght.css';
+import '@fontsource-variable/open-sans/wght-italic.css';
+import '@fontsource-variable/literata/opsz.css';
+import '@fontsource-variable/literata/opsz-italic.css';
+import '@fontsource-variable/grandstander/wght.css';
+import '@fontsource-variable/grandstander/wght-italic.css';
+import '../styles/global.css';
+import { type Lang, defaultLang, getAlternateLinks } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: Lang;
+}
+
+const { title, description = '', lang = defaultLang } = Astro.props;
+const siteUrl = Astro.site?.origin ?? '';
+const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- hreflang alternate links for SEO -->
+    {alternateLinks.map(({ lang: altLang, href }) => (
+      <link rel="alternate" hreflang={altLang} href={href} />
+    ))}
+
+    <title>{title}</title>
+    <slot name="head" />
+  </head>
+  <body class="font-literata text-navy">
+    <slot />
+  </body>
+</html>

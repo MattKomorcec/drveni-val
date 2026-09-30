@@ -1,0 +1,17 @@
+---
+interface Props {
+  bgColor?: string;
+}
+
+const { bgColor = 'bg-navy' } = Astro.props;
+---
+
+<div class={bgColor}>
+  <img
+    src="/images/wave_navy_header_bottom_left.png"
+    alt=""
+    width="1440"
+    height="148"
+    class="w-full"
+  />
+</div>

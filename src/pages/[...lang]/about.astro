@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutPage from '../../components/AboutPage.astro';
+import { type Lang, defaultLang, t, getLocalePaths } from '../../i18n/utils';
+
+export const getStaticPaths = getLocalePaths;
+
+const lang = (Astro.params.lang as Lang) || defaultLang;
+---
+
+<BaseLayout title={t(lang, 'page.about.title')} description={t(lang, 'page.about.description')} lang={lang}>
+  <AboutPage lang={lang} />
+</BaseLayout>

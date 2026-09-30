@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactPage from '../../components/ContactPage.astro';
+import { type Lang, defaultLang, t, getLocalePaths } from '../../i18n/utils';
+
+export const getStaticPaths = getLocalePaths;
+
+const lang = (Astro.params.lang as Lang) || defaultLang;
+---
+
+<BaseLayout title={t(lang, 'page.contact.title')} lang={lang}>
+  <ContactPage lang={lang} />
+</BaseLayout>

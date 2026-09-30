@@ -1,0 +1,142 @@
+---
+import { type Lang, t } from '../i18n/utils';
+import Header from './Header.astro';
+import HeaderWave from './HeaderWave.astro';
+import FooterWave from './FooterWave.astro';
+import Footer from './Footer.astro';
+import AboutSection from './AboutSection.astro';
+import Button from './Button.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Header lang={lang} />
+
+<!-- Hero section with profile -->
+<div class="bg-navy px-4 md:px-20">
+  <div class="pb-40 pt-20 px-6 flex flex-wrap justify-center">
+    <div class="w-full sm:w-1/2 relative max-w-[550px]">
+      <img src="/images/about_profile.jpg" width="100" height="100" alt="Željka Komorčec" class="w-full relative sm:absolute" />
+    </div>
+    <div class="w-full sm:w-1/2 text-white py-10 px-10 relative max-w-[550px]">
+      <h2 class="text-left text-3xl leading-10">{t(lang, 'about.greeting1')}</h2>
+      <h2 class="text-left text-3xl leading-10">{t(lang, 'about.greeting2')}</h2>
+      <img src="/svg/sun.svg" width="100" height="100" alt="" class="absolute top-[-5%] right-[-5%] sm:top-[-10%] sm:right-[-10%] animate-glow" />
+      <p class="mt-8 font-normal italic">{t(lang, 'about.greeting_text')}</p>
+    </div>
+  </div>
+</div>
+
+<HeaderWave bgColor="bg-lightblue" />
+
+<!-- Welcome section -->
+<div class="bg-lightblue px-4 md:px-20 py-40 text-navy text-center">
+  <div class="max-w-[900px] mx-auto relative pb-14">
+    <h2 class="text-[44px] mb-20">{t(lang, 'about.welcome_title')}</h2>
+    <p class="mb-8">{t(lang, 'about.welcome_p1')}</p>
+    <p class="mb-8">{t(lang, 'about.welcome_p2')}</p>
+    <p>{t(lang, 'about.welcome_p3')}</p>
+    <img src="/svg/branch.svg" width="119" height="176" alt="" class="mt-10 absolute left-[42%] rotate-[33deg]" />
+    <img src="/svg/branch.svg" width="119" height="176" alt="" class="mt-10 absolute left-[44%] rotate-[270deg]" />
+  </div>
+</div>
+
+<div class="bg-lightblue">
+  <img src="/images/about_necklace_houses.png" width="100" height="100" alt="" class="w-full" />
+</div>
+
+<!-- Sea gifts sections -->
+<div class="bg-lightblue py-20 relative flex">
+  <div>
+    <h2 class="text-navy text-center text-[44px] mb-20">{t(lang, 'about.gifts_title')}</h2>
+
+    <AboutSection
+      imageNumber={1}
+      heading={t(lang, 'about.section1_heading')}
+      text1={t(lang, 'about.section1_text1')}
+      text2={t(lang, 'about.section1_text2')}
+      containerClass="px-8 md:px-40"
+    />
+
+    <AboutSection
+      imageNumber={2}
+      heading={t(lang, 'about.section2_heading')}
+      text1={t(lang, 'about.section2_text1')}
+      text2={t(lang, 'about.section2_text2')}
+      containerClass="px-8 md:pl-40 md:pr-20 md:ml-40"
+    />
+
+    <AboutSection
+      imageNumber={3}
+      heading={t(lang, 'about.section3_heading')}
+      text1={t(lang, 'about.section3_text1')}
+      text2={t(lang, 'about.section3_text2')}
+      containerClass="px-8 md:px-40"
+    />
+  </div>
+</div>
+
+<!-- Inspiration section -->
+<div class="bg-navy">
+  <img src="/images/about_wave_lightblue_top_left.png" alt="" width="1440" height="148" class="w-full" />
+</div>
+
+<div class="bg-navy px-4 md:px-40 py-20 text-white">
+  <h2 class="text-center text-[44px] mb-20">{t(lang, 'about.inspiration_title')}</h2>
+
+  <p class="max-w-[900px] text-center mx-auto italic mb-20">{t(lang, 'about.inspiration_intro')}</p>
+
+  <img src="/images/about_novi_through_windows.png" width="100" height="100" alt="Novi Vinodolski" class="w-full block mx-auto max-w-[900px]" />
+
+  <div class="flex mt-14 justify-center flex-wrap">
+    <div class="px-5 max-w-[450px]">
+      <p class="mb-5">{t(lang, 'about.inspiration_p1')}</p>
+      <p class="mb-5">{t(lang, 'about.inspiration_p2')}</p>
+      <p>{t(lang, 'about.inspiration_p3')}</p>
+    </div>
+    <div class="px-5 max-w-[450px]">
+      <p class="mb-5">{t(lang, 'about.inspiration_p4')}</p>
+      <p class="mb-5">{t(lang, 'about.inspiration_p5')}</p>
+      <p>{t(lang, 'about.inspiration_p6')}</p>
+    </div>
+  </div>
+
+  <div class="text-center mt-40">
+    <div class="w-72 mx-auto">
+      <Button
+        text={t(lang, 'about.explore_novi')}
+        href="https://novi-vinodolski.hr/"
+        variant="orange"
+        target="_blank"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Partners section -->
+<div class="bg-lightblue">
+  <img src="/images/about_wave_navy_top_left.png" alt="" width="1440" height="148" class="w-full" />
+</div>
+
+<div class="bg-lightblue px-4 md:px-20 pb-20">
+  <h2 class="text-navy text-center text-[44px] mb-20">{t(lang, 'about.partners_title')}</h2>
+
+  <div class="flex flex-wrap justify-center gap-20 items-center">
+    <a href="https://novi-vinodolski.hr/" target="_blank" rel="noopener noreferrer" class="w-1/2 md:w-[13%] h-max">
+      <img src="/images/logo_novi_vinodolski.png" width="100" height="100" alt="Novi Vinodolski" class="w-full" />
+    </a>
+    <a href="https://www.tz-novi-vinodolski.hr" target="_blank" rel="noopener noreferrer" class="w-1/2 md:w-[13%] h-max">
+      <img src="/images/logo_tourist_community.png" width="100" height="100" alt="Tourist Community" class="w-full" />
+    </a>
+    <a href="https://www.rc-rijeka.hr/" target="_blank" rel="noopener noreferrer" class="w-1/2 md:w-[13%] h-max">
+      <img src="/images/logo_rotary_club.png" width="100" height="100" alt="Rotary Club Rijeka" class="w-full" />
+    </a>
+  </div>
+</div>
+
+<FooterWave bgColor="bg-lightblue" />
+<Footer lang={lang} />

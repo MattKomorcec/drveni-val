@@ -1,0 +1,77 @@
+---
+import { type Lang, t, getLocalizedPath, getNavLinks, isActivePath } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const currentYear = new Date().getFullYear();
+const currentPath = Astro.url.pathname;
+const navLinks = getNavLinks(lang);
+---
+
+<div class="bg-navy px-4 lg:px-20 py-20 font-open-sans relative">
+  <div class="flex justify-center">
+    <a href={getLocalizedPath(lang, '/')}>
+      <img src="/svg/logo-name-bottom.svg" alt="Drveni Val" width="auto" height="120px" />
+    </a>
+  </div>
+
+  <div class="space-x-8 text-white flex justify-center mt-8 text-sm">
+    {navLinks.map(({ label, href }) => (
+      <a href={href} class:list={['underline hover:text-orange', isActivePath(href, currentPath) && 'text-orange']}>
+        {label}
+      </a>
+    ))}
+  </div>
+
+  <div class="text-white flex justify-center mt-8 text-center text-sm">
+    <p>
+      Obrt za izradu suvenira <br />
+      vl. {t(lang, 'footer.owner')}
+    </p>
+  </div>
+
+  <div class="text-white flex justify-center mt-6 text-center text-sm">
+    <p>
+      KRALJA TOMISLAVA 3A, NOVI VINODOLSKI <br />
+      TEL: +385 91 888-9310
+    </p>
+  </div>
+
+  <div class="text-white flex justify-center mt-10 text-center gap-4">
+    <a href="https://www.facebook.com/drvenival" target="_blank" rel="noopener noreferrer">
+      <img src="/svg/icon_facebook_rounded.svg" width="40" height="40" alt="Facebook" />
+    </a>
+    <a href="https://www.instagram.com/drveni_val/" target="_blank" rel="noopener noreferrer">
+      <img src="/svg/icon_instagram_rounded.svg" width="40" height="40" alt="Instagram" />
+    </a>
+  </div>
+
+  <div class="text-white justify-center mt-10 text-center text-xs">
+    <a href={getLocalizedPath(lang, '/privacy-policy')} class="underline">
+      {t(lang, 'footer.privacy')}
+    </a>
+  </div>
+
+  <div class="text-white text-center mt-6 text-xs">
+    <p>{t(lang, 'footer.copyright')} &copy; {currentYear} Drveni Val</p>
+  </div>
+
+  <img
+    src="/svg/seaweed.svg"
+    width="100"
+    height="100"
+    alt=""
+    class="absolute bottom-0 right-8 w-16 md:w-28 transition-transform"
+  />
+
+  <img
+    src="/svg/seahorse.svg"
+    width="100"
+    height="100"
+    alt=""
+    class="absolute top-[50%] left-[15%] hidden md:block animate-wiggle"
+  />
+</div>

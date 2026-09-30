@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import HeaderWave from '../components/HeaderWave.astro';
+import FooterWave from '../components/FooterWave.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import { t, getLangFromUrl, getLocalizedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout title="404 — Drveni Val" lang={lang}>
+  <Header lang={lang} />
+  <HeaderWave bgColor="bg-lightblue" />
+
+  <div class="bg-lightblue px-4 md:px-20 py-20">
+    <h2 class="text-center text-5xl text-navy font-semibold">Oops!</h2>
+    <h2 class="text-center text-5xl text-navy mb-9 font-semibold leading-tight">{t(lang, '404.title')}</h2>
+    <div class="relative h-25.5">
+      <img src="/svg/fish1.svg" width="34" height="34" alt="" class="absolute top-8.75 sm:left-[35%] left-[10%]" />
+      <img src="/svg/fish2.svg" width="34" height="34" alt="" class="absolute top-3.75 sm:left-[39%] left-[19%]" />
+      <img src="/svg/fish3.svg" width="34" height="34" alt="" class="absolute top-0 sm:left-[43%] left-[29%]" />
+    </div>
+    <img src="/svg/404.svg" width="200" height="100" alt="404" class="block mx-auto" />
+    <p class="font-semibold text-center text-navy mt-14">{t(lang, '404.text')}</p>
+  </div>
+
+  <div class="bg-lightblue pt-4 pb-40 text-center">
+    <Button text={t(lang, '404.back')} href={getLocalizedPath(lang, '/')} variant="orange" />
+  </div>
+
+  <FooterWave bgColor="bg-lightblue" />
+  <Footer lang={lang} />
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import HeaderWave from '../../components/HeaderWave.astro';
+import Hero from '../../components/Hero.astro';
+import SectionsDescriptions from '../../components/SectionsDescriptions.astro';
+import FeaturedProducts from '../../components/FeaturedProducts.astro';
+import BusinessCTA from '../../components/BusinessCTA.astro';
+import Reviews from '../../components/Reviews.astro';
+import ImageGallery from '../../components/ImageGallery.astro';
+import FAQ from '../../components/FAQ.astro';
+import FooterWave from '../../components/FooterWave.astro';
+import Footer from '../../components/Footer.astro';
+import { type Lang, defaultLang, t, getLocalePaths } from '../../i18n/utils';
+
+export const getStaticPaths = getLocalePaths;
+
+const lang = (Astro.params.lang as Lang) || defaultLang;
+---
+
+<BaseLayout title={t(lang, 'page.home.title')} description={t(lang, 'page.home.description')} lang={lang}>
+  <Header lang={lang} />
+  <HeaderWave bgColor="bg-navy" />
+  <Hero lang={lang} />
+  <SectionsDescriptions lang={lang} />
+  <FeaturedProducts lang={lang} />
+  <BusinessCTA lang={lang} />
+  <Reviews lang={lang} />
+  <ImageGallery lang={lang} />
+  <FAQ lang={lang} />
+  <FooterWave bgColor="bg-white" />
+  <Footer lang={lang} />
+</BaseLayout>

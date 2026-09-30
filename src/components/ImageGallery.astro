@@ -1,0 +1,69 @@
+---
+import { type Lang, t } from '../i18n/utils';
+import Button from './Button.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="bg-navy px-4 md:px-20 py-20">
+  <h2 class="text-white text-center text-[44px] mb-20">{t(lang, 'gallery.title')}</h2>
+
+  <div
+    class="mb-4 gap-4 mx-auto flex flex-col justify-between items-end w-full lg:grid lg:justify-items-end"
+    style="grid-template-columns: 1fr 1fr;"
+  >
+    <img
+      src="/images/gallery_zeljka_komorcec.jpg"
+      alt="Zeljka Komorcec holding a photo"
+      class="object-contain"
+      width="100%"
+      height="auto"
+    />
+    <div class="flex flex-wrap gap-4 h-full justify-between">
+      <img
+        src="/images/gallery_painting4.jpg"
+        alt="Drveni Val gallery"
+        class="object-contain"
+        width="100%"
+        height="auto"
+      />
+      <img
+        src="/images/gallery_next_to_entrance.jpg"
+        alt="Drveni Val gallery entrance"
+        class="object-contain"
+        width="100%"
+        height="auto"
+      />
+    </div>
+  </div>
+
+  <div class="gap-4 flex flex-col items-center lg:grid" style="grid-template-columns: 1fr 1fr 1fr;">
+    <img src="/images/gallery_painting1.png" alt="Painting driftwood" width="100%" height="auto" class="object-contain" />
+    <img src="/images/gallery_painting2.jpg" alt="Painting driftwood" width="100%" height="auto" class="object-contain" />
+    <img src="/images/gallery_painting3.jpeg" alt="Painting driftwood" width="100%" height="auto" class="object-contain" />
+  </div>
+
+  <div class="mt-32 mb-32 flex justify-center">
+    <Button
+      text={t(lang, 'gallery.cta')}
+      href="https://www.instagram.com/drveni_val/"
+      variant="orange"
+      target="_blank"
+    />
+  </div>
+</div>
+
+<div class="bg-white relative">
+  <img
+    src="/svg/lighthouse_full.svg"
+    width="99"
+    height="290"
+    alt=""
+    class="absolute left-[15%] bottom-[-15%] md:w-auto hidden lg:block"
+  />
+  <img src="/images/wave_navy_top_right.png" alt="" width="100%" height="100%" />
+</div>

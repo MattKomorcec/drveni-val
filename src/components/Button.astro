@@ -1,0 +1,33 @@
+---
+interface Props {
+  text: string;
+  href: string;
+  variant?: 'orange' | 'transparent' | 'white';
+  target?: string;
+  class?: string;
+}
+
+const { text, href, variant = 'orange', target = '_self', class: className = '' } = Astro.props;
+
+const variants = {
+  orange:
+    'border-2 border-orange bg-orange text-white hover:bg-white hover:border-orange hover:text-orange',
+  transparent:
+    'border-2 border-white text-white hover:bg-white hover:text-navy',
+  white:
+    'bg-white text-navy hover:bg-navy hover:text-white',
+};
+---
+
+<a
+  href={href}
+  target={target}
+  {...(target === '_blank' ? { rel: 'noopener noreferrer' } : {})}
+  class:list={[
+    'inline-block px-10 py-4 rounded-full font-open-sans font-semibold text-center',
+    variants[variant],
+    className,
+  ]}
+>
+  {text}
+</a>

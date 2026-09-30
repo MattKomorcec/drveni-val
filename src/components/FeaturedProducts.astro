@@ -1,0 +1,45 @@
+---
+import { type Lang, t, getLocalizedPath } from '../i18n/utils';
+import Button from './Button.astro';
+import ProductCard from './ProductCard.astro';
+import { getFeaturedProducts } from '../data/products';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const featured = getFeaturedProducts();
+---
+
+<div class="bg-navy px-4 md:px-20 py-20">
+  <h2 class="font-bold text-white text-center text-[44px] mb-20">{t(lang, 'featured.title')}</h2>
+
+  <div class="flex flex-col justify-between md:flex-row md:flex-wrap gap-20 md:gap-4">
+    {featured.map((product) => (
+      <ProductCard product={product} lang={lang} href={getLocalizedPath(lang, `/products#${product.slug}`)} />
+    ))}
+  </div>
+
+  <div class="mt-32 mb-32 flex justify-center">
+    <Button text={t(lang, 'featured.view_all')} href={getLocalizedPath(lang, '/products')} variant="orange" />
+  </div>
+</div>
+
+<div class="bg-sea-blue relative">
+  <img src="/images/wave_navy_top_right.png" alt="" width="1440" height="123" class="w-full" />
+  <img
+    src="/svg/sun.svg"
+    alt=""
+    width="273"
+    height="273"
+    class="w-1/6 absolute top-[-30%] right-[120px] animate-glow"
+  />
+  <img
+    src="/images/skure_green_frame.png"
+    alt=""
+    width="350"
+    height="auto"
+    class="hidden md:block absolute w-1/5 top-[80px] left-0 rotate-[-12.7deg]"
+  />
+</div>
