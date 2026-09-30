@@ -19,7 +19,7 @@
   "featured.view_all": "Pogledaj sve radove",
 
   "business_cta.title": "Tražite savršeni ekološki poslovni poklon s motivom Jadrana?",
-  "business_cta.text": "Sviđaju Vam se naše kreativne naplavine i željeli biste naručiti poslovne poklone za Vaše goste, poslovne partnere ili klijente? Javite nam se putem kontakt forme sa svim detaljima, a mi ćemo se javiti s procjenom cijene i vremena izrade u najkraćem roku.",
+  "business_cta.text": "Sviđaju Vam se naše kreativne naplavine i željeli biste naručiti poslovne poklone za Vaše goste, poslovne partnere ili klijente? Javite nam se sa svim detaljima, a mi ćemo se javiti s procjenom cijene i vremena izrade u najkraćem roku.",
   "business_cta.button": "Pošaljite nam upit",
 
   "reviews.title": "Recenzije naših kupaca",
@@ -45,12 +45,9 @@
   "footer.privacy": "Politika privatnosti",
 
   "contact.title": "Kontakt",
-  "contact.name": "Ime i prezime",
-  "contact.email": "Email",
-  "contact.phone": "Telefon (opcionalno)",
-  "contact.message": "Poruka",
-  "contact.send": "Pošalji",
-  "contact.success": "Hvala na poruci! Odgovorit ćemo vam u najkraćem mogućem roku.",
+  "contact.intro": "Imate pitanje o našim radovima ili želite naručiti poslovne poklone? Javite nam se e-mailom ili telefonom, rado ćemo Vam odgovoriti.",
+  "contact.email_label": "E-mail",
+  "contact.phone_label": "Telefon",
   "contact.hours": "Radno vrijeme",
   "contact.hours_value": "Pon - Pet: 09:00 - 17:00",
   "contact.hours_extra": "Prema dogovoru",

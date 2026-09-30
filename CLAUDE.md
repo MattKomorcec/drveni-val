@@ -41,6 +41,6 @@ npm run build     # static output in dist/
 ## Conventions
 
 - All customer-facing content is in Croatian first; keep EN and DE in sync when changing texts.
-- The contact form in `ContactPage.astro` has no submit handler yet (GitHub Pages has no backend). The decision on a
-  form service is pending.
+- There is no contact form (GitHub Pages has no backend). The contact page lists email and phone. Adding a form
+  later needs a third-party form service and an update to the privacy policy.
 - Vanilla JS in `<script>` tags only, no UI frameworks.

@@ -1,5 +1,5 @@
 ---
-import { type Lang, t, getLocalizedPath } from '../i18n/utils';
+import { type Lang, t } from '../i18n/utils';
 import Header from './Header.astro';
 import HeaderWave from './HeaderWave.astro';
 import FooterWave from './FooterWave.astro';
@@ -11,9 +11,6 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-
-const inputClass =
-  'block w-full rounded-[4px] border-0 py-[10px] px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 mb-7';
 ---
 
 <Header lang={lang} />
@@ -21,24 +18,27 @@ const inputClass =
 
 <div class="bg-lightblue px-4 md:px-20 py-20">
   <div class="bg-white rounded-3xl py-16 relative max-w-5xl mx-auto">
-    <h2 class="text-center text-2xl text-navy">{t(lang, 'contact.title')}</h2>
+    <h1 class="text-center text-2xl text-navy">{t(lang, 'contact.title')}</h1>
     <img src="/svg/stamp.svg" width="100" height="100" alt="" class="absolute top-[-10%] right-22.5 rotate-12" />
 
-    <form class="contact-form" id="contact-form">
-      <input type="text" name="name" placeholder={t(lang, 'contact.name')} class={inputClass} required />
-      <input type="email" name="email" placeholder={t(lang, 'contact.email')} class={inputClass} required />
-      <input type="tel" name="phone" placeholder={t(lang, 'contact.phone')} class={inputClass} />
-      <textarea name="message" placeholder={t(lang, 'contact.message')} class={inputClass} required></textarea>
-      <button
-        type="submit"
-        class="bg-orange text-white px-10 py-4 rounded-full border-2 border-orange hover:bg-white hover:text-orange font-open-sans font-semibold block mx-auto"
+    <p class="text-center text-navy max-w-xl mx-auto mt-8 px-6">{t(lang, 'contact.intro')}</p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 px-6 font-open-sans font-semibold">
+      <a
+        href="mailto:drvenival@gmail.com"
+        class="px-8 py-4 rounded-full border-2 border-orange bg-orange text-white hover:bg-white hover:text-orange"
+        aria-label={`${t(lang, 'contact.email_label')}: drvenival@gmail.com`}
       >
-        {t(lang, 'contact.send')}
-      </button>
-      <div id="form-success" class="hidden mt-8">
-        <p class="text-navy text-center">{t(lang, 'contact.success')}</p>
-      </div>
-    </form>
+        drvenival@gmail.com
+      </a>
+      <a
+        href="tel:+385918889310"
+        class="px-8 py-4 rounded-full border-2 border-navy text-navy hover:bg-navy hover:text-white"
+        aria-label={`${t(lang, 'contact.phone_label')}: +385 91 888-9310`}
+      >
+        +385 91 888-9310
+      </a>
+    </div>
   </div>
 
   <div class="mt-40">
@@ -52,11 +52,6 @@ const inputClass =
         {t(lang, 'contact.hours_value')} <br />
         {t(lang, 'contact.hours_extra')}
       </p>
-    </div>
-    <div>
-      <p class="font-bold">{t(lang, 'contact.title')}</p>
-      <a href="mailto:drvenival@gmail.com" class="underline">drvenival@gmail.com</a><br />
-      <a href="tel:+385918889310">+385 91 888-9310</a>
     </div>
     <div>
       <p class="font-bold">{t(lang, 'contact.address_label')}</p>

@@ -42,8 +42,3 @@
 img {
   user-select: none;
 }
-
-.contact-form {
-  max-width: 550px;
-  margin: 40px auto 0 auto;
-}
