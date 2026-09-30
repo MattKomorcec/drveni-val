@@ -1,5 +1,6 @@
 ---
 import { type Lang, t, getLocalizedPath } from '../i18n/utils';
+import Img from './Img.astro';
 import Button from './Button.astro';
 
 interface Props {
@@ -28,7 +29,7 @@ const { lang } = Astro.props;
     </div>
 
     <div class="lg:w-1/3 w-full relative">
-      <img src="/images/hero_image.png" width="100" height="100" alt="Drveni Val products" class="w-full" />
+      <Img src="/images/hero_image.png" displayWidth={480} alt="Drveni Val products" class="w-full" loading="eager" fetchpriority="high" />
     </div>
   </div>
 

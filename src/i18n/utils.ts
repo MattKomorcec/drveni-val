@@ -33,14 +33,17 @@ export function t(lang: Lang, key: string): string {
 }
 
 /**
- * Build a localized path. Croatian (default) has no prefix.
- * e.g. getLocalizedPath('en', '/about') => '/en/about'
- *      getLocalizedPath('hr', '/about') => '/about'
+ * Build a localized path with a trailing slash (GitHub Pages redirects `/about` to `/about/`).
+ * Croatian (default) has no prefix.
+ * e.g. getLocalizedPath('en', '/about') => '/en/about/'
+ *      getLocalizedPath('hr', '/about#team') => '/about/#team'
  */
 export function getLocalizedPath(lang: Lang, path: string): string {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  if (lang === defaultLang) return cleanPath;
-  return `/${lang}${cleanPath}`;
+  const [rawPath, hash] = path.split('#');
+  let cleanPath = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+  if (!cleanPath.endsWith('/')) cleanPath += '/';
+  const localized = lang === defaultLang ? cleanPath : `/${lang}${cleanPath}`;
+  return hash === undefined ? localized : `${localized}#${hash}`;
 }
 
 /**

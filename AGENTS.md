@@ -34,7 +34,14 @@ npm run build     # static output in dist/
 - `src/pages/[...lang]/products.astro` is the showcase page, with a `<dialog>` photo viewer. `ProductCard` opens the
   viewer, or links to `/products#<slug>` when given `href` (homepage featured products).
 - Privacy policy content is one component per language: `src/components/PrivacyContent{HR,EN,DE}.astro`.
-- `astro.config.mjs` generates redirect pages for old Shopify URLs.
+- `astro.config.mjs` generates redirect pages for old Shopify URLs and the sitemap (`@astrojs/sitemap`, with
+  hreflang). `trailingSlash: 'always'`: `getLocalizedPath()` always returns paths ending in `/`.
+- Content images (photos) live in `src/assets/images/` and are rendered with `src/components/Img.astro`, which
+  resolves a `'/images/...'` path via `src/lib/images.ts` and outputs responsive WebP. Pass `displayWidth` (largest
+  CSS width). Small decorative PNGs (waves), favicons and SVGs stay in `public/`.
+- SEO: `BaseLayout.astro` renders canonical, hreflang, Open Graph tags and JSON-LD structured data (business,
+  website, page) from `src/lib/schema.ts`. Pages add nodes via the `schema` prop (FAQ on home, item list on
+  products). Use `noindex` for pages that should stay out of search.
 - Deployment: GitHub Pages via `.github/workflows/deploy.yml` on push to `main`, custom domain `drvenival.hr`.
   All asset paths are root-relative, so the site must be served from a domain root.
 

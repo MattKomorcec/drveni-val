@@ -15,6 +15,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/grandstander": "^5.3.0",
     "@fontsource-variable/literata": "^5.3.0",
     "@fontsource-variable/open-sans": "^5.3.0",

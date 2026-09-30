@@ -1,5 +1,6 @@
 ---
 import { type Lang, t } from '../i18n/utils';
+import Img from './Img.astro';
 import Header from './Header.astro';
 import HeaderWave from './HeaderWave.astro';
 import FooterWave from './FooterWave.astro';
@@ -20,11 +21,13 @@ const { lang } = Astro.props;
 <div class="bg-navy px-4 md:px-20">
   <div class="pb-40 pt-20 px-6 flex flex-wrap justify-center">
     <div class="w-full sm:w-1/2 relative max-w-[550px]">
-      <img src="/images/about_profile.jpg" width="100" height="100" alt="Željka Komorčec" class="w-full relative sm:absolute" />
+      <Img src="/images/about_profile.jpg" displayWidth={550} alt="Željka Komorčec" class="w-full relative sm:absolute" loading="eager" fetchpriority="high" />
     </div>
     <div class="w-full sm:w-1/2 text-white py-10 px-10 relative max-w-[550px]">
-      <h2 class="text-left text-3xl leading-10">{t(lang, 'about.greeting1')}</h2>
-      <h2 class="text-left text-3xl leading-10">{t(lang, 'about.greeting2')}</h2>
+      <h1 class="text-left text-3xl leading-10">
+        <span class="block">{t(lang, 'about.greeting1')}</span>
+        <span class="block">{t(lang, 'about.greeting2')}</span>
+      </h1>
       <img src="/svg/sun.svg" width="100" height="100" alt="" class="absolute top-[-5%] right-[-5%] sm:top-[-10%] sm:right-[-10%] animate-glow" />
       <p class="mt-8 font-normal italic">{t(lang, 'about.greeting_text')}</p>
     </div>
@@ -46,7 +49,7 @@ const { lang } = Astro.props;
 </div>
 
 <div class="bg-lightblue">
-  <img src="/images/about_necklace_houses.png" width="100" height="100" alt="" class="w-full" />
+  <Img src="/images/about_necklace_houses.png" displayWidth={1440} sizes="100vw" alt="" class="w-full" />
 </div>
 
 <!-- Sea gifts sections -->
@@ -90,7 +93,7 @@ const { lang } = Astro.props;
 
   <p class="max-w-[900px] text-center mx-auto italic mb-20">{t(lang, 'about.inspiration_intro')}</p>
 
-  <img src="/images/about_novi_through_windows.png" width="100" height="100" alt="Novi Vinodolski" class="w-full block mx-auto max-w-[900px]" />
+  <Img src="/images/about_novi_through_windows.png" displayWidth={900} alt="Novi Vinodolski" class="w-full block mx-auto max-w-[900px]" />
 
   <div class="flex mt-14 justify-center flex-wrap">
     <div class="px-5 max-w-[450px]">
@@ -127,13 +130,13 @@ const { lang } = Astro.props;
 
   <div class="flex flex-wrap justify-center gap-20 items-center">
     <a href="https://novi-vinodolski.hr/" target="_blank" rel="noopener noreferrer" class="w-1/2 md:w-[13%] h-max">
-      <img src="/images/logo_novi_vinodolski.png" width="100" height="100" alt="Novi Vinodolski" class="w-full" />
+      <Img src="/images/logo_novi_vinodolski.png" displayWidth={200} alt="Novi Vinodolski" class="w-full" />
     </a>
     <a href="https://www.tz-novi-vinodolski.hr" target="_blank" rel="noopener noreferrer" class="w-1/2 md:w-[13%] h-max">
-      <img src="/images/logo_tourist_community.png" width="100" height="100" alt="Tourist Community" class="w-full" />
+      <Img src="/images/logo_tourist_community.png" displayWidth={200} alt="Tourist Community" class="w-full" />
     </a>
     <a href="https://www.rc-rijeka.hr/" target="_blank" rel="noopener noreferrer" class="w-1/2 md:w-[13%] h-max">
-      <img src="/images/logo_rotary_club.png" width="100" height="100" alt="Rotary Club Rijeka" class="w-full" />
+      <Img src="/images/logo_rotary_club.png" displayWidth={200} alt="Rotary Club Rijeka" class="w-full" />
     </a>
   </div>
 </div>

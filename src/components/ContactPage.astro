@@ -1,5 +1,6 @@
 ---
 import { type Lang, t } from '../i18n/utils';
+import Img from './Img.astro';
 import Header from './Header.astro';
 import HeaderWave from './HeaderWave.astro';
 import FooterWave from './FooterWave.astro';
@@ -26,7 +27,7 @@ const { lang } = Astro.props;
     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 px-6 font-open-sans font-semibold">
       <a
         href="mailto:drvenival@gmail.com"
-        class="px-8 py-4 rounded-full border-2 border-orange bg-orange text-white hover:bg-white hover:text-orange"
+        class="px-8 py-4 rounded-full border-2 border-orange-dark bg-orange-dark text-white hover:bg-white hover:text-orange-dark"
         aria-label={`${t(lang, 'contact.email_label')}: drvenival@gmail.com`}
       >
         drvenival@gmail.com
@@ -66,10 +67,10 @@ const { lang } = Astro.props;
 
 <div class="flex gap-4 py-10 bg-lightblue sm:flex-row flex-col">
   <a href="https://maps.app.goo.gl/vkM8cY1ng6xi3JL6A" target="_blank" rel="noopener noreferrer" class="w-full sm:w-1/2">
-    <img src="/images/googlemap_croatia.png" width="100" height="100" class="w-full" alt="Map of Croatia" />
+    <Img src="/images/googlemap_croatia.png" displayWidth={720} sizes="(max-width: 640px) 100vw, 50vw" class="w-full" alt="Map of Croatia showing Novi Vinodolski" />
   </a>
   <a href="https://maps.app.goo.gl/vkM8cY1ng6xi3JL6A" target="_blank" rel="noopener noreferrer" class="w-full sm:w-1/2">
-    <img src="/images/googlemap_novi_drvenival.png" width="100" height="100" class="w-full" alt="Map of Novi Vinodolski" />
+    <Img src="/images/googlemap_novi_drvenival.png" displayWidth={720} sizes="(max-width: 640px) 100vw, 50vw" class="w-full" alt="Map of Novi Vinodolski showing the Drveni Val studio" />
   </a>
 </div>
 

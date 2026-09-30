@@ -12,13 +12,19 @@ import FAQ from '../../components/FAQ.astro';
 import FooterWave from '../../components/FooterWave.astro';
 import Footer from '../../components/Footer.astro';
 import { type Lang, defaultLang, t, getLocalePaths } from '../../i18n/utils';
+import { faqSchema } from '../../lib/schema';
 
 export const getStaticPaths = getLocalePaths;
 
 const lang = (Astro.params.lang as Lang) || defaultLang;
 ---
 
-<BaseLayout title={t(lang, 'page.home.title')} description={t(lang, 'page.home.description')} lang={lang}>
+<BaseLayout
+  title={t(lang, 'page.home.title')}
+  description={t(lang, 'page.home.description')}
+  lang={lang}
+  schema={[faqSchema(lang)]}
+>
   <Header lang={lang} />
   <HeaderWave bgColor="bg-navy" />
   <Hero lang={lang} />

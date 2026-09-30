@@ -8,6 +8,6 @@ export const getStaticPaths = getLocalePaths;
 const lang = (Astro.params.lang as Lang) || defaultLang;
 ---
 
-<BaseLayout title={t(lang, 'page.contact.title')} lang={lang}>
+<BaseLayout title={t(lang, 'page.contact.title')} description={t(lang, 'page.contact.description')} lang={lang}>
   <ContactPage lang={lang} />
 </BaseLayout>

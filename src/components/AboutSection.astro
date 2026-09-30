@@ -1,4 +1,6 @@
 ---
+import Img from './Img.astro';
+
 interface Props {
   imageNumber: number;
   heading: string;
@@ -18,8 +20,8 @@ const { imageNumber, heading, text1, text2, containerClass = '' } = Astro.props;
   </div>
 
   <div class="w-full md:w-1/2 relative stacked-image">
-    <img src={`/images/about_image_${imageNumber}.png`} width="100" height="100" class="w-full" alt="" />
-    <img src={`/images/about_box_${imageNumber}.png`} width="100" height="100" class="w-full" alt="" />
+    <Img src={`/images/about_image_${imageNumber}.png`} displayWidth={640} class="w-full" alt="" />
+    <Img src={`/images/about_box_${imageNumber}.png`} displayWidth={300} class="w-full" alt="" />
   </div>
 </div>
 

@@ -4,7 +4,7 @@
   "nav.about": "O meni",
   "nav.contact": "Kontakt",
 
-  "hero.title": "Unesite dašak šarenog Jadrana <br> u vaš dom s našim jedinstvenim <br> suvenirima",
+  "hero.title": "Unesite dašak šarenog Jadrana <br> u vaš dom s našim jedinstvenim <br> suvenirima od naplavina",
   "hero.cta_products": "Pogledajte naše radove",
   "hero.cta_about": "Kako je sve počelo",
 
@@ -35,7 +35,7 @@
   "faq.q2": "Mogu li naručiti personalizirani proizvod?",
   "faq.a2": "Ne nudimo mogućnost personaliziranja proizvoda.",
   "faq.q3": "Gdje mogu kupiti vaše radove?",
-  "faq.a3": "Naše radove možete pogledati i kupiti u studiju Drveni Val u Novom Vinodolskom, na adresi Kralja Tomislava 3a. Za sva ostala pitanja slobodno nam se javite putem kontakt stranice.",
+  "faq.a3": "Naše radove možete pogledati i kupiti u studiju Drveni Val u Novom Vinodolskom, na adresi Kralja Tomislava 3a. Radove šaljemo i poštom unutar Hrvatske: javite nam se e-mailom ili telefonom i recite nam koji Vas rad zanima.",
   "faq.q4": "Je li svaki proizvod jedinstven?",
   "faq.a4": "Da, svaki naš proizvod je uistinu jedinstven! Izrađujemo ih ručno, s posebnom pažnjom posvećenom svakom detalju. To znači da nikada nećete dobiti dva identična proizvoda - svaki je unikat s vlastitim karakterom i šarmom!",
 
@@ -49,15 +49,15 @@
   "contact.email_label": "E-mail",
   "contact.phone_label": "Telefon",
   "contact.hours": "Radno vrijeme",
-  "contact.hours_value": "Pon - Pet: 09:00 - 17:00",
-  "contact.hours_extra": "Prema dogovoru",
+  "contact.hours_value": "Ljeti gotovo svaki dan, zimi skraćeno",
+  "contact.hours_extra": "Prije dolaska nas slobodno nazovite",
   "contact.how_to_find": "Kako do nas?",
   "contact.address_label": "Adresa",
 
   "about.title": "O meni",
   "about.greeting1": "Pozdrav!",
   "about.greeting2": "Ja sam Željka, kreativna snaga iza Drvenog Vala.",
-  "about.greeting_text": "Vrata Drvenog vala su vam otvorena svakog dana u radno vrijeme. Pozivam Vas da dođete i provirite u moj mali komadić morskog svijeta i pronađete savršenu uspomenu na Novi Vinodolski.",
+  "about.greeting_text": "Vrata Drvenog vala otvorena su Vam u radno vrijeme, a ljeti gotovo svaki dan. Pozivam Vas da dođete i provirite u moj mali komadić morskog svijeta i pronađete savršenu uspomenu na Novi Vinodolski.",
   "about.welcome_title": "Dobro došli u moj svijet",
   "about.welcome_p1": "Prije mnogo godina sam napustila dugogodišnji posao i ostvarila svoj kreativni san - preselila sam se na prekrasnu jadransku obalu. U Novom Vinodolskom, jednom od predivnih gradića hrvatske obale, pronašla sam svoju oazu mira.",
   "about.welcome_p2": "Ovdje sam otvorila svoj kreativni studio - radionicu i prodavaonicu umjetnina smještenu uz Jadransku magistralu, nadomak centra grada. U Drvenom valu ručno izrađujem suvenire od recikliranog drveta i naplavina koje izbacuje more.",
@@ -97,15 +97,17 @@
   "products.prev": "Prethodna slika",
   "products.next": "Sljedeća slika",
 
-  "page.products.title": "Naši radovi — Drveni Val",
+  "page.products.title": "Naši radovi: slike i suveniri od naplavina | Drveni Val",
   "page.products.description": "Ručno izrađene slike, škure, vješalice i drugi unikatni radovi od naplavnog drva iz Novog Vinodolskog.",
-  "page.home.title": "Drveni Val — Jedinstveni suveniri od naplavnog drva",
+  "page.home.title": "Drveni Val — Suveniri od naplavnog drva, Novi Vinodolski",
   "page.home.description": "Ručno izrađeni suveniri od naplavnog drva s jadranske obale. Jedinstveni pokloni inspirirani morem.",
-  "page.about.title": "O meni — Drveni Val",
+  "page.about.title": "O meni — Željka Komorčec | Drveni Val",
   "page.about.description": "Upoznajte Željku i priču iza Drvenog Vala — kreativnog studija u Novom Vinodolskom.",
-  "page.contact.title": "Kontakt — Drveni Val",
+  "page.contact.title": "Kontakt i lokacija studija u Novom Vinodolskom | Drveni Val",
+  "page.contact.description": "Posjetite studio Drveni Val u Novom Vinodolskom (Kralja Tomislava 3a) ili nam se javite e-mailom ili telefonom. Šaljemo i poštom unutar Hrvatske.",
   "page.privacy.title": "Politika privatnosti — Drveni Val",
   "page.privacy.heading": "Politika privatnosti",
+  "page.privacy.description": "Kako Drveni Val postupa s osobnim podacima: bez kolačića i praćenja, podaci iz upita koriste se samo za odgovor.",
 
   "language": "Jezik"
 }

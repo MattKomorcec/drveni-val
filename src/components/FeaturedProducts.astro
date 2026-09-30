@@ -1,5 +1,6 @@
 ---
 import { type Lang, t, getLocalizedPath } from '../i18n/utils';
+import Img from './Img.astro';
 import Button from './Button.astro';
 import ProductCard from './ProductCard.astro';
 import { getFeaturedProducts } from '../data/products';
@@ -35,11 +36,10 @@ const featured = getFeaturedProducts();
     height="273"
     class="w-1/6 absolute top-[-30%] right-[120px] animate-glow"
   />
-  <img
+  <Img
     src="/images/skure_green_frame.png"
+    displayWidth={350}
     alt=""
-    width="350"
-    height="auto"
     class="hidden md:block absolute w-1/5 top-[80px] left-0 rotate-[-12.7deg]"
   />
 </div>

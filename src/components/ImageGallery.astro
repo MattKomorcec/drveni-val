@@ -1,5 +1,6 @@
 ---
 import { type Lang, t } from '../i18n/utils';
+import Img from './Img.astro';
 import Button from './Button.astro';
 
 interface Props {
@@ -16,35 +17,32 @@ const { lang } = Astro.props;
     class="mb-4 gap-4 mx-auto flex flex-col justify-between items-end w-full lg:grid lg:justify-items-end"
     style="grid-template-columns: 1fr 1fr;"
   >
-    <img
+    <Img
       src="/images/gallery_zeljka_komorcec.jpg"
-      alt="Zeljka Komorcec holding a photo"
-      class="object-contain"
-      width="100%"
-      height="auto"
+      displayWidth={640}
+      alt="Željka Komorčec holding a driftwood painting"
+      class="object-contain w-full"
     />
     <div class="flex flex-wrap gap-4 h-full justify-between">
-      <img
+      <Img
         src="/images/gallery_painting4.jpg"
-        alt="Drveni Val gallery"
-        class="object-contain"
-        width="100%"
-        height="auto"
+        displayWidth={640}
+        alt="Driftwood paintings on the wall of the Drveni Val studio"
+        class="object-contain w-full"
       />
-      <img
+      <Img
         src="/images/gallery_next_to_entrance.jpg"
-        alt="Drveni Val gallery entrance"
-        class="object-contain"
-        width="100%"
-        height="auto"
+        displayWidth={640}
+        alt="Entrance of the Drveni Val studio in Novi Vinodolski"
+        class="object-contain w-full"
       />
     </div>
   </div>
 
   <div class="gap-4 flex flex-col items-center lg:grid" style="grid-template-columns: 1fr 1fr 1fr;">
-    <img src="/images/gallery_painting1.png" alt="Painting driftwood" width="100%" height="auto" class="object-contain" />
-    <img src="/images/gallery_painting2.jpg" alt="Painting driftwood" width="100%" height="auto" class="object-contain" />
-    <img src="/images/gallery_painting3.jpeg" alt="Painting driftwood" width="100%" height="auto" class="object-contain" />
+    <Img src="/images/gallery_painting1.png" displayWidth={430} alt="Painting driftwood" class="object-contain w-full" />
+    <Img src="/images/gallery_painting2.jpg" displayWidth={430} alt="Painting driftwood" class="object-contain w-full" />
+    <Img src="/images/gallery_painting3.jpeg" displayWidth={430} alt="Painting driftwood" class="object-contain w-full" />
   </div>
 
   <div class="mt-32 mb-32 flex justify-center">

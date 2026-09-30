@@ -21,7 +21,8 @@ Node version is in `.nvmrc`.
 ## Editing content
 
 - **Texts** (all languages): `src/i18n/hr.json`, `en.json`, `de.json`. All three files must have the same keys (a test checks this).
-- **Products**: `src/data/products.json`. Photos go in `public/images/products/`. The first image is the one shown on the card.
+- **Products**: `src/data/products.json`. Photos go in `src/assets/images/products/` (referenced as
+  `/images/products/...`) and are converted to WebP automatically. The first image is the one shown on the card.
   Set `"featured": true` to show a product on the homepage.
 - **Product groups**: `src/data/collections.json`. Set `"enabled": false` to hide a whole group.
 - **Privacy policy**: `src/components/PrivacyContentHR.astro`, `PrivacyContentEN.astro`, `PrivacyContentDE.astro`.
@@ -49,6 +50,12 @@ Keep any existing MX/TXT records for email.
 
 The site uses root-relative paths (`/images/...`), so it needs its own domain. It does not work under
 `<github-user>.github.io/<repo>/`.
+
+## Search engines
+
+- Sitemap: https://drvenival.hr/sitemap-index.xml (submit in Google Search Console and Bing Webmaster Tools).
+- Structured data (business details, FAQ, product list) is in `src/lib/schema.ts`. Keep the address and phone there
+  in sync with the contact page.
 
 ## Old Shopify URLs
 

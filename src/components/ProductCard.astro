@@ -1,7 +1,10 @@
 ---
+import { getImage } from 'astro:assets';
 import { type Lang, t } from '../i18n/utils';
 import type { Product } from '../data/types';
 import { colorMap } from '../data/types';
+import { resolveImage } from '../lib/images';
+import Img from './Img.astro';
 
 interface Props {
   product: Product;
@@ -18,12 +21,19 @@ const lastWord = titleWords[titleWords.length - 1];
 const titleWithoutLast = titleWords.slice(0, -1).join(' ');
 const underlineColor = colorMap[lastWord] ?? 'transparent';
 
+// Large versions for the photo viewer on the products page
+const viewerImages = href
+  ? []
+  : await Promise.all(
+      product.images.map(async (src) => (await getImage({ src: resolveImage(src), width: 1200, format: 'webp' })).src),
+    );
+
 const Tag = href ? 'a' : 'button';
 const tagProps = href
   ? { href }
   : {
       type: 'button',
-      'data-product-viewer': JSON.stringify(product.images),
+      'data-product-viewer': JSON.stringify(viewerImages),
       'data-title': title,
       'aria-label': `${title}: ${t(lang, 'products.open')}`,
     };
@@ -31,13 +41,12 @@ const tagProps = href
 
 <article id={product.slug} class="bg-white text-navy rounded-lg max-w-[310px] w-full mx-auto scroll-mt-8">
   <Tag {...tagProps} class="block w-full text-left cursor-pointer group">
-    <img
+    <Img
       src={product.images[0]}
+      displayWidth={310}
+      sizes="310px"
       alt={title}
       class="object-cover rounded-t-lg w-full aspect-[310/315] transition-opacity group-hover:opacity-90"
-      width="310"
-      height="315"
-      loading="lazy"
     />
     <p class="font-semibold px-6 py-6 text-xl">
       {titleWithoutLast}{' '}

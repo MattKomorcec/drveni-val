@@ -10,13 +10,15 @@ import { t, getLangFromUrl, getLocalizedPath } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<BaseLayout title="404 — Drveni Val" lang={lang}>
+<BaseLayout title="404 — Drveni Val" lang={lang} noindex>
   <Header lang={lang} />
   <HeaderWave bgColor="bg-lightblue" />
 
   <div class="bg-lightblue px-4 md:px-20 py-20">
-    <h2 class="text-center text-5xl text-navy font-semibold">Oops!</h2>
-    <h2 class="text-center text-5xl text-navy mb-9 font-semibold leading-tight">{t(lang, '404.title')}</h2>
+    <h1 class="text-center text-5xl text-navy mb-9 font-semibold leading-tight">
+      <span class="block">Oops!</span>
+      <span class="block">{t(lang, '404.title')}</span>
+    </h1>
     <div class="relative h-25.5">
       <img src="/svg/fish1.svg" width="34" height="34" alt="" class="absolute top-8.75 sm:left-[35%] left-[10%]" />
       <img src="/svg/fish2.svg" width="34" height="34" alt="" class="absolute top-3.75 sm:left-[39%] left-[19%]" />

@@ -7,18 +7,53 @@ import '@fontsource-variable/literata/opsz-italic.css';
 import '@fontsource-variable/grandstander/wght.css';
 import '@fontsource-variable/grandstander/wght-italic.css';
 import '../styles/global.css';
-import { type Lang, defaultLang, getAlternateLinks } from '../i18n/utils';
+// Body font files, preloaded so text renders in the final font sooner (Croatian needs latin-ext too)
+import literataLatin from '@fontsource-variable/literata/files/literata-latin-opsz-normal.woff2?url';
+import literataLatinExt from '@fontsource-variable/literata/files/literata-latin-ext-opsz-normal.woff2?url';
+import { getImage } from 'astro:assets';
+import { type Lang, defaultLang, languages, getAlternateLinks } from '../i18n/utils';
+import { resolveImage } from '../lib/images';
+import { type SchemaNode, businessSchema, websiteSchema, webPageSchema } from '../lib/schema';
 
 interface Props {
   title: string;
   description?: string;
   lang?: Lang;
+  /** Social preview image, as a '/images/...' path from src/assets. */
+  image?: string;
+  imageAlt?: string;
+  /** Keep the page out of search results (e.g. 404). */
+  noindex?: boolean;
+  /** Extra structured data nodes for this page (FAQ, item lists, ...). */
+  schema?: SchemaNode[];
 }
 
-const { title, description = '', lang = defaultLang } = Astro.props;
+const {
+  title,
+  description = '',
+  lang = defaultLang,
+  image = '/images/gallery_next_to_entrance.jpg',
+  imageAlt = 'Drveni Val, Novi Vinodolski',
+  noindex = false,
+  schema = [],
+} = Astro.props;
 const siteUrl = Astro.site?.origin ?? '';
 const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+
+const ogLocales: Record<Lang, string> = { hr: 'hr_HR', en: 'en_GB', de: 'de_DE' };
+const ogImage = await getImage({ src: resolveImage(image), width: 1200, format: 'jpg' });
+const ogImageUrl = new URL(ogImage.src, siteUrl).href;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    businessSchema(lang, new URL(ogImage.src, siteUrl).href),
+    websiteSchema(),
+    ...(noindex ? [] : [webPageSchema(canonicalUrl, title, description, lang)]),
+    ...schema,
+  ],
+};
 ---
 
 <!doctype html>
@@ -31,15 +66,40 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
     <link rel="icon" href="/favicon.ico" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href={literataLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={literataLatinExt} as="font" type="font/woff2" crossorigin />
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
 
-    <link rel="canonical" href={canonicalUrl} />
+    {noindex ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <>
+        <link rel="canonical" href={canonicalUrl} />
+        <!-- hreflang alternate links for SEO -->
+        {alternateLinks.map(({ lang: altLang, href }) => (
+          <link rel="alternate" hreflang={altLang} href={href} />
+        ))}
+      </>
+    )}
 
-    <!-- hreflang alternate links for SEO -->
-    {alternateLinks.map(({ lang: altLang, href }) => (
-      <link rel="alternate" hreflang={altLang} href={href} />
-    ))}
+    <!-- Social previews (Facebook, WhatsApp, Instagram DMs, ...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Drveni Val" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={ogLocales[lang]} />
+    {(Object.keys(languages) as Lang[])
+      .filter((l) => l !== lang)
+      .map((l) => <meta property="og:locale:alternate" content={ogLocales[l]} />)}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImage.attributes.width)} />
+    <meta property="og:image:height" content={String(ogImage.attributes.height)} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <title>{title}</title>
     <slot name="head" />

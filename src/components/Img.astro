@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import type { HTMLAttributes } from 'astro/types';
+import { resolveImage } from '../lib/images';
+
+interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'width' | 'height' | 'srcset'> {
+  /** Path as it was under public/, e.g. '/images/hero_image.png' (file lives in src/assets/images). */
+  src: string;
+  alt: string;
+  /** Largest CSS width the image is shown at. The srcset covers half, 1x and 2x of it. */
+  displayWidth: number;
+  sizes?: string;
+}
+
+const { src, alt, displayWidth, sizes = `(max-width: ${displayWidth}px) 100vw, ${displayWidth}px`, ...attrs } =
+  Astro.props;
+
+const image = resolveImage(src);
+const widths = [...new Set([displayWidth / 2, displayWidth, displayWidth * 2].map((w) => Math.min(Math.round(w), image.width)))];
+---
+
+<Image src={image} alt={alt} widths={widths} sizes={sizes} {...attrs} />

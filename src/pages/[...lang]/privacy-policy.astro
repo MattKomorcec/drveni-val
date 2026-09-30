@@ -14,7 +14,7 @@ const content = { hr: PrivacyContentHR, en: PrivacyContentEN, de: PrivacyContent
 const Content = content[lang];
 ---
 
-<BaseLayout title={t(lang, 'page.privacy.title')} lang={lang}>
+<BaseLayout title={t(lang, 'page.privacy.title')} description={t(lang, 'page.privacy.description')} lang={lang}>
   <LegalPageLayout lang={lang}>
     <div class="legal-content">
       <h1 class="text-center text-2xl mb-8">{t(lang, 'page.privacy.heading')}</h1>

@@ -11,6 +11,8 @@
   --color-mint-green: #90EBC4;
   --color-navy: #0C0B51;
   --color-orange: #EC6A21;
+  /* Darker orange for white text on buttons (4.5:1 contrast, WCAG AA) */
+  --color-orange-dark: #C94F14;
   --color-pink: #F2ABC9;
   --color-sea-blue: #1540C1;
   --color-turqoise: #39CEE6;

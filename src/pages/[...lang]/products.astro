@@ -7,15 +7,37 @@ import Footer from '../../components/Footer.astro';
 import Button from '../../components/Button.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { type Lang, defaultLang, t, getLocalizedPath, getLocalePaths } from '../../i18n/utils';
+import { getImage } from 'astro:assets';
 import { collections } from '../../data/collections';
 import { getProductsByCollection } from '../../data/products';
+import { resolveImage } from '../../lib/images';
+import { itemListSchema } from '../../lib/schema';
 
 export const getStaticPaths = getLocalePaths;
 
 const lang = (Astro.params.lang as Lang) || defaultLang;
+
+const pageUrl = new URL(getLocalizedPath(lang, '/products'), Astro.site).href;
+const listItems = await Promise.all(
+  collections
+    .flatMap((collection) => getProductsByCollection(collection.slug))
+    .map(async (product) => ({
+      name: product.title,
+      url: `${pageUrl}#${product.slug}`,
+      image: new URL((await getImage({ src: resolveImage(product.images[0]), width: 620, format: 'webp' })).src, Astro.site)
+        .href,
+    })),
+);
 ---
 
-<BaseLayout title={t(lang, 'page.products.title')} description={t(lang, 'page.products.description')} lang={lang}>
+<BaseLayout
+  title={t(lang, 'page.products.title')}
+  description={t(lang, 'page.products.description')}
+  lang={lang}
+  image="/images/gallery_painting4.jpg"
+  imageAlt={t(lang, 'products.title')}
+  schema={[itemListSchema(t(lang, 'products.title'), listItems)]}
+>
   <Header lang={lang} />
   <HeaderWave bgColor="bg-lightblue" />
 

@@ -66,22 +66,27 @@ describe('t', () => {
 
 describe('getLocalizedPath', () => {
   it('returns path without prefix for Croatian (default)', () => {
-    expect(getLocalizedPath('hr', '/about')).toBe('/about');
+    expect(getLocalizedPath('hr', '/about')).toBe('/about/');
     expect(getLocalizedPath('hr', '/')).toBe('/');
   });
 
   it('adds /en/ prefix for English', () => {
-    expect(getLocalizedPath('en', '/about')).toBe('/en/about');
+    expect(getLocalizedPath('en', '/about')).toBe('/en/about/');
     expect(getLocalizedPath('en', '/')).toBe('/en/');
   });
 
   it('adds /de/ prefix for German', () => {
-    expect(getLocalizedPath('de', '/about')).toBe('/de/about');
+    expect(getLocalizedPath('de', '/about')).toBe('/de/about/');
     expect(getLocalizedPath('de', '/')).toBe('/de/');
   });
 
   it('handles paths without leading slash', () => {
-    expect(getLocalizedPath('en', 'about')).toBe('/en/about');
+    expect(getLocalizedPath('en', 'about')).toBe('/en/about/');
+  });
+
+  it('keeps the hash after the trailing slash', () => {
+    expect(getLocalizedPath('hr', '/products#skure')).toBe('/products/#skure');
+    expect(getLocalizedPath('en', '/products#skure')).toBe('/en/products/#skure');
   });
 });
 
@@ -117,28 +122,28 @@ describe('getAlternateLinks', () => {
     const links = getAlternateLinks('/about');
     const hrLink = links.find((l) => l.lang === 'hr');
     const enLink = links.find((l) => l.lang === 'en');
-    expect(hrLink?.href).toBe('/about');
-    expect(enLink?.href).toBe('/en/about');
+    expect(hrLink?.href).toBe('/about/');
+    expect(enLink?.href).toBe('/en/about/');
   });
 
   it('generates absolute URLs when siteUrl is provided', () => {
     const links = getAlternateLinks('/about', 'https://drvenival.hr');
     const hrLink = links.find((l) => l.lang === 'hr');
     const enLink = links.find((l) => l.lang === 'en');
-    expect(hrLink?.href).toBe('https://drvenival.hr/about');
-    expect(enLink?.href).toBe('https://drvenival.hr/en/about');
+    expect(hrLink?.href).toBe('https://drvenival.hr/about/');
+    expect(enLink?.href).toBe('https://drvenival.hr/en/about/');
   });
 
   it('strips existing language prefix before generating links', () => {
     const links = getAlternateLinks('/en/about');
     const hrLink = links.find((l) => l.lang === 'hr');
-    expect(hrLink?.href).toBe('/about');
+    expect(hrLink?.href).toBe('/about/');
   });
 
   it('x-default points to the default locale (Croatian)', () => {
     const links = getAlternateLinks('/en/about', 'https://drvenival.hr');
     const xDefault = links.find((l) => l.lang === 'x-default');
-    expect(xDefault?.href).toBe('https://drvenival.hr/about');
+    expect(xDefault?.href).toBe('https://drvenival.hr/about/');
   });
 });
 
@@ -160,7 +165,7 @@ describe('getNavLinks', () => {
   it('localizes paths for English', () => {
     const links = getNavLinks('en');
     const aboutLink = links.find((l) => l.label === 'About me');
-    expect(aboutLink?.href).toBe('/en/about');
+    expect(aboutLink?.href).toBe('/en/about/');
   });
 });
 
